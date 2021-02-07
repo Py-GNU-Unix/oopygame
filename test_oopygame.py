@@ -17,8 +17,8 @@ import oopygame as oop
 import pygame
 
 if __name__ == "__main__":
-    W = oop.Window(flags=0, bg_color=oop.colors.white)
-    obj = oop.Object(W, pos=(pygame.DOUBLEBUF,160))
+    W = oop.Window(flags=pygame.DOUBLEBUF, bg_color=oop.colors.white)
+    obj = oop.Object(W, pos=(160,160))
     clock = oop.time.Clock(60, W)
     
     while True:
