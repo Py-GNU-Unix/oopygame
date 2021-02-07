@@ -63,10 +63,8 @@ class Object(BaseObject):
         BaseObject.__init__(
             self, pos=pos, depth_level=depth_level, image=image)
             
-        self.master_window = master_window
+        self.set_master_window(master_window)
         self.size = size if size else image.get_size()
-        
-        self.master_window.add_object(self)
 
 #<><><><><><><><>#
     
@@ -75,21 +73,23 @@ class Object(BaseObject):
         self.set_pos((current_pos[x] + px, current_pos[y]))
         
     def move_left(self, px):
-        current_pos = self.get_pos()[x]
+        current_pos = self.get_pos()
         self.set_pos((current_pos[x] - px, current_pos[y]))
         
     def move_up(self, px):
-        current_pos = self.get_pos()[y]
-        self.set_pos((current_pos[x] + px, current_pos[y]))
+        current_pos = self.get_pos()
+        
+        self.set_pos((current_pos[x], current_pos[y] - px))
         
     def move_down(self, px):
-        current_pos = self.get_pos()[y]
-        self.set_pos((current_pos[x] - px, current_pos[y]))
+        current_pos = self.get_pos()
+        self.set_pos((current_pos[x], current_pos[y] + px))
         
 #<><><><><><><><>#
 
     def set_master_window(self, new_master):
         self.master_window = new_master
+        self.master_window.add_object(self)
         
     def set_size(self, new_size):
         print(f"set_size method is deprecated for {self.__class__}", file=sys.stderr)
@@ -112,9 +112,9 @@ class Object(BaseObject):
         
         for choor in x,y:
             if pos[choor] < (0-obj_size[choor]):
-                return True
+                return choor, pos[choor]-(0-obj_size[choor])
             if pos[choor] > window_size[choor]:
-                return True
+                return choor, pos[choor] - window_size[choor]
         
         return False
         
@@ -124,9 +124,11 @@ class Object(BaseObject):
         window_size = self.master_window.get_window_size()
         
         for choor in x,y:
-            if pos[choor] < 0:
+            if pos[choor] < 0 and pos[choor] > -obj_size[choor]:
                 return True
-            if pos[choor] + obj_size[choor] > window_size[choor]:
+            
+            border_distance = pos[choor] - window_size[choor]
+            if border_distance < obj_size[choor] and border_distance > 0:
                 return True
         
         return False

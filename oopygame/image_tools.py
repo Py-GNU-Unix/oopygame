@@ -37,8 +37,7 @@ def load_image(filename, fit_to=False):
     if filename.endswith(".svg"):
         return load_svg(filename, fit_to)
     else:
-        image = load_normal_image(filename, fit_to)
-        return image
+        return load_normal_image(filename, fit_to)
     
 def scale_image(image, fit_to):
     return pygame.transform.scale(image, fit_to)

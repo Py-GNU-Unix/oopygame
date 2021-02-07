@@ -21,7 +21,8 @@ class Clock:
         self.FPS = FPS
         self.window = window
         self.delay = 1 / FPS
-        self.wait = 0.02
+        self.wait_time = 0.02
+        self.wait_func = self.wait
         self.last = time.time()
         
     def is_ready(self):
@@ -33,9 +34,15 @@ class Clock:
             return True
         
         return False
-        
+    
+    def wait(self):
+        self.window.have_to_close()
+        pygame.display.update()
+        time.sleep(self.wait_time)
+    
+    def set_wait_func(self, new_func):
+        self.wait_func = new_func
+    
     def tick(self):
         while not self.is_ready():
-            self.window.have_to_close()
-            pygame.display.flip()
-            time.sleep(self.wait)
+            self.wait_func()

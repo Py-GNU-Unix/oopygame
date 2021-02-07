@@ -32,9 +32,10 @@ class NotInizializedScreen: pass
 
 
 class BaseWindow:
-    def __init__(self, size=(500, 500), pos=None, flags=0):
+    def __init__(self, size=(500, 500), flags=0, pos=None):
         self.open_size = size
         self.flags = flags
+        
         self.screen = NotInizializedScreen()
         self.objects = {}
 
