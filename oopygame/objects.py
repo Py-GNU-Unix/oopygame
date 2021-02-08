@@ -14,6 +14,7 @@
 # ~ along with oopygame.  If not, see <https://www.gnu.org/licenses/>.
 
 import sys
+import pygame
 from . import image_tools
 
 default_image_fn = f"{'/'.join(__file__.split('/')[:-1])}/icon.svg"
@@ -40,6 +41,9 @@ class BaseObject:
     def get_pos(self):
         return self.pos
 
+    def get_size(self):
+        return self.size
+
 #<><><><><><><><>#
 
     def set_image(self, new_image):
@@ -50,9 +54,19 @@ class BaseObject:
 
     def set_pos(self, new_pos):
         self.pos = new_pos
-    
+
+    def set_size(self, new_size):
+        print(f"set_size method is deprecated for {self.__class__}", file=sys.stderr)
+        
+        self.size = new_size
+        new_image = image_tools.scale_image(self.image, new_size)
+        self.set_image(new_image)
+        
     set_real_pos = set_pos
     get_real_pos = get_pos
+    
+    set_real_size = set_size
+    get_real_size = get_size
 
 #°*°*°*°*°*°*°*°*°*°*°*°*°*°*°*#
         
@@ -64,7 +78,12 @@ class Object(BaseObject):
             self, pos=pos, depth_level=depth_level, image=image)
             
         self.set_master_window(master_window)
-        self.size = size if size else image.get_size()
+        
+        if size:
+            self.size = size
+            self.image = image_tools.scale(self.image, size)
+        else:
+            self.size = image.get_size()
 
 #<><><><><><><><>#
     
@@ -91,23 +110,11 @@ class Object(BaseObject):
         self.master_window = new_master
         self.master_window.add_object(self)
         
-    def set_size(self, new_size):
-        print(f"set_size method is deprecated for {self.__class__}", file=sys.stderr)
-        
-        self.size = new_size
-        new_image = image_tools.scale_image(self.image, new_size)
-        self.set_image(new_image)
-
-#<><><><><><><><>#
-        
-    def get_size(self):
-        return self.size
-        
 #<><><><><><><><>#
     
     def is_out_of_window(self):
         pos = self.get_real_pos()
-        obj_size = self.get_size()
+        obj_size = self.get_real_size()
         window_size = self.master_window.get_window_size()
         
         for choor in x,y:
@@ -120,7 +127,7 @@ class Object(BaseObject):
         
     def is_touching_borders(self):
         pos = self.get_pos()
-        obj_size = self.get_size()
+        obj_size = self.get_real_size()
         window_size = self.master_window.get_window_size()
         
         for choor in x,y:
@@ -132,6 +139,23 @@ class Object(BaseObject):
                 return True
         
         return False
+    
+    def is_touching(self, other):
+        rects = []
+        
+        for obj in self, other:
+            obj_real_pos = obj.get_real_pos()
+            obj_real_size = obj.get_real_size()
+            obj_rect = pygame.Rect(obj_real_pos, obj_real_size)
+            
+            rects.append(obj_rect)
+            
+                      
+        
+        return rects[0].colliderect(rects[1])
+    
+
+#°*°*°*°*°*°*°*°*°*°*°*°*°*°*°*#
 
 class SvgObject(Object):
     def __init__(self, master_window, filename=default_image_fn, 
@@ -154,14 +178,54 @@ class SvgObject(Object):
     def get_filename(self):
         return self.filename
 
+#°*°*°*°*°*°*°*°*°*°*°*°*°*°*°*#
+
 class PercentedObject(Object):
+    def __init__(self, master_window, pos=(0,0), depth_level=0,
+            image=default_image, size=None):
+        
+        BaseObject.__init__(
+            self, pos=pos, depth_level=depth_level, image=image)
+        
+        self.set_master_window(master_window)
+        if not size:
+            size = image.get_size()
+            self.set_real_size(size)
+        else:
+            self.set_size(size)
+
+#<><><><><><><><>#
+
     def get_real_pos(self):
         x_pos = self.master_window.perc_to_px(self.pos[x], "x")
         y_pos = self.master_window.perc_to_px(self.pos[y], "y")
         return x_pos, y_pos
-    
+
+    def get_real_size(self):
+        real_size_x = self.master_window.perc_to_px(self.size[x], "x")
+        real_size_y = self.master_window.perc_to_px(self.size[y], "y")
+        
+        return real_size_x, real_size_y
+        
+    def get_size(self):
+        return self.size
+
+    def get_image(self):
+        real_size = self.get_real_size()
+        return image_tools.scale_image(self.image, real_size)
+        
+#<><><><><><><><>#
+
     def set_real_pos(self, new_pos):
         x_pos = self.master_window.px_to_perc(new_pos[x], "x")
         y_pos = self.master_window.px_to_perc(new_pos[y], "y")
-        self.set_pos(x_pos, y_pos)        
+        self.set_pos((x_pos, y_pos))
+    
+    def set_real_size(self, new_size):
+        size_x = self.master_window.px_to_perc(new_size[x], "x")
+        size_y = self.master_window.px_to_perc(new_size[y], "y")
         
+        self.set_size((size_x, size_y))
+    
+    def set_size(self, new_size):
+        self.size = new_size
