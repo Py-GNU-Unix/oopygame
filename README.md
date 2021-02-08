@@ -79,6 +79,7 @@ if __name__ == "__main__":
         clock.tick()
 ```
 
+We hope that our article has helped you
 
 
 
