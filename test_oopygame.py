@@ -16,8 +16,7 @@
 import oopygame as oop
 import pygame
 
-# ~ class movable:
-    # ~ def __init__(
+
 
 if __name__ == "__main__":
     W = oop.Window(flags=pygame.DOUBLEBUF, bg_color=oop.colors.white)
