@@ -16,7 +16,7 @@
 import oopygame as oop
 import pygame
 
-
+        
 
 if __name__ == "__main__":
     W = oop.Window(flags=pygame.DOUBLEBUF, bg_color=oop.colors.white)
@@ -25,22 +25,9 @@ if __name__ == "__main__":
     
     clicked = False
     while True:
-        for event in W.get_events():
-            if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
-                if obj.get_rect().collidepoint(event.pos):
-                    clicked = True
-            
-            elif event.type == pygame.MOUSEBUTTONUP and event.button == 1:
-                clicked = False
-            
-            
-        if clicked:
-            mouse_pos = pygame.mouse.get_pos()
-            obj_size = obj.get_size()
-            
-            pos_to_go = [mouse_pos[choor]-(obj_size[choor]/2) for choor in (0,1)]
-            
-            obj.set_pos(pos_to_go)
+        daemon = oop.daemons.movable(W, obj)
+        W.add_daemon(daemon)
+
         
         W.do_routine()
         clock.tick()
