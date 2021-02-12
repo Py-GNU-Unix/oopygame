@@ -158,6 +158,7 @@ class Window(BaseWindow):
         BaseWindow.__init__(self, size=size, pos=pos, flags=flags)
         self.set_icon(icon)
         self.bg_color = bg_color
+        self.events = ()
 
         if not title:
             title = Window.generate_default_title()
@@ -166,6 +167,7 @@ class Window(BaseWindow):
         self.open_window()
 
     def update(self, blit_objs=True):
+        self.update_events()
         self.clear_screen(self.bg_color)
         self.blit_objects()
         pygame.display.update()
@@ -188,3 +190,17 @@ class Window(BaseWindow):
         window_size = self.get_window_size()
         px = round_func(window_size[mode] / 100 * perc)
         return px
+
+    # <><><><><><><><>#
+
+    def update_events(self, cache_func=False):
+        if cache_func:
+            cache_func(self.events)
+        
+        new_events = pygame.event.get()
+        self.events = new_events
+    
+    def get_events(self, eventtype=None):
+        for event in self.events:
+            if not eventtype or event.type==eventtype:
+                yield event

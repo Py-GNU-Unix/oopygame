@@ -21,11 +21,29 @@ if __name__ == "__main__":
     obj = oop.Object(W, pos=(0,160))
     clock = oop.time.Clock(60, W)
     
+    clicked = False
     while True:
-        obj.move_right(2.5)
+        # ~ obj.move_right(2.5)
         
         if obj.is_out_of_window():
             obj.set_pos((-59,160))
+        
+        for event in W.get_events():
+            if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
+                if obj.get_rect().collidepoint(event.pos):
+                    clicked = True
+            
+            elif event.type == pygame.MOUSEBUTTONUP and event.button == 1:
+                clicked = False
+            
+            
+        if clicked:
+            mouse_pos = pygame.mouse.get_pos()
+            obj_size = obj.get_size()
+            
+            pos_to_go = [mouse_pos[choor]-(obj_size[choor]/2) for choor in (0,1)]
+            
+            obj.set_pos(pos_to_go)
         
         W.do_routine()
         clock.tick()

@@ -144,15 +144,25 @@ class Object(BaseObject):
         rects = []
         
         for obj in self, other:
-            obj_real_pos = obj.get_real_pos()
-            obj_real_size = obj.get_real_size()
-            obj_rect = pygame.Rect(obj_real_pos, obj_real_size)
-            
+            obj_rect = obj.get_rect()
             rects.append(obj_rect)
-            
-                      
         
         return rects[0].colliderect(rects[1])
+    
+    def is_clicked(self, btn_number=0):
+        mouse_status = pygame.mouse.get_pressed()[btn_number]
+        
+        if mouse_status:
+            choords_mouse = pygame.mouse.get_pos()
+            my_rect = self.get_rect()
+            return my_rect.collidepoint(choords_mouse)
+    
+    def get_rect(self):
+        my_real_pos = self.get_real_pos()
+        my_real_size = self.get_real_size()
+        my_rect = pygame.Rect(my_real_pos, my_real_size)
+        
+        return my_rect
     
 
 #°*°*°*°*°*°*°*°*°*°*°*°*°*°*°*#
