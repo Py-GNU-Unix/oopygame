@@ -16,6 +16,9 @@
 import oopygame as oop
 import pygame
 
+# ~ class movable:
+    # ~ def __init__(
+
 if __name__ == "__main__":
     W = oop.Window(flags=pygame.DOUBLEBUF, bg_color=oop.colors.white)
     obj = oop.Object(W, pos=(0,160))
@@ -23,11 +26,6 @@ if __name__ == "__main__":
     
     clicked = False
     while True:
-        # ~ obj.move_right(2.5)
-        
-        if obj.is_out_of_window():
-            obj.set_pos((-59,160))
-        
         for event in W.get_events():
             if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
                 if obj.get_rect().collidepoint(event.pos):
