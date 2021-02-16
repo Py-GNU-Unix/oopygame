@@ -219,4 +219,4 @@ class Window(BaseWindow):
         self.daemons.append(new_daemon)
     
     def remove_daemon(self, daemon_to_remove):
-        self.daemons.remove(daemon_to_remove)
+        return self.daemons.remove(daemon_to_remove)

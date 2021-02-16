@@ -13,10 +13,10 @@
 # ~ You should have received a copy of the GNU General Public License
 # ~ along with oopygame.  If not, see <https://www.gnu.org/licenses/>.
 
-
+class OOPyException(Exception):     pass
 
 from .window import Window, BaseWindow
-from .objects import Object, BaseObject, SvgObject, PercentedObject
+from .objects import Object, BaseObject, SvgObject, PercentedObject, ShadowObject
 from . import time
 from . import image_tools
 from . import colors

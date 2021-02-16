@@ -20,16 +20,29 @@ import pygame
 
 if __name__ == "__main__":
     W = oop.Window(flags=pygame.DOUBLEBUF, bg_color=oop.colors.white)
-    obj = oop.Object(W, pos=(0,160))
-    clock = oop.time.Clock(60, W)
+    obj = oop.Object(W, pos=(0,0))
     
-    clicked = False
-    while True:
-        daemon = oop.daemons.movable(W, obj)
-        W.add_daemon(daemon)
+    image = oop.image_tools.load_image("/home/luca/Documents/Coding/Python/OOPygameProject/oopygame/platform.png")
+    image = oop.image_tools.scale_image(image, (500,128))
+    platform = oop.Object(W, pos=(-80,372), image=image)
+    clock = oop.time.Clock(60, W)
 
+    daem = oop.daemons.gravity(obj, platforms=[platform])
+    W.add_daemon(daem)
+        
+    while True:
+        if W.detect_key(pygame.K_RIGHT):
+            obj.move_right(2)
+        
+        if W.detect_key(pygame.K_LEFT):
+            obj.move_left(2)
+        
+        if W.detect_key(pygame.K_UP):
+            obj.move_up(8)
+            
         
         W.do_routine()
         clock.tick()
+        
         
         

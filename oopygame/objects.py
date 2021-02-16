@@ -164,6 +164,31 @@ class Object(BaseObject):
         
         return my_rect
     
+    def get_side(self, side, side_size=5):
+        my_real_pos = self.get_real_pos()
+        my_real_size = self.get_real_size()
+        
+        if side == "up":
+            my_real_size = (my_real_size[0], side_size)
+            
+        elif side == "down":
+            my_real_pos = (my_real_pos[0], my_real_pos[1]+my_real_size[1]-side_size)
+            my_real_size = (my_real_size[0], side_size)
+        
+        elif side == "right":
+            my_real_pos = (my_real_pos[0]+my_real_size[0], my_real_pos[1]-side_size)
+            my_real_size = (side_size, my_real_size[1])        
+        
+        elif side == "left":
+            my_real_size = (side_size, my_real_size[0])
+        
+        else:
+            raise TypeError(f"unknow side {side}")
+            
+        my_side = pygame.Rect(my_real_pos, my_real_size)
+        
+        return my_side        
+    
 
 #°*°*°*°*°*°*°*°*°*°*°*°*°*°*°*#
 
@@ -239,3 +264,9 @@ class PercentedObject(Object):
     
     def set_size(self, new_size):
         self.size = new_size
+
+class ShadowObject(Object):
+    def __init__(self, *args, **kwargs):
+        Object.__init__(self, *args, **kwargs)
+        rect = self.get_rect()
+        self.image = pygame.Surface((rect.w,rect.h))
