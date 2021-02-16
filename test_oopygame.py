@@ -15,14 +15,13 @@
 
 import oopygame as oop
 import pygame
-
+from oopygame.objects import  platform_image as image
         
 
 if __name__ == "__main__":
     W = oop.Window(flags=pygame.DOUBLEBUF, bg_color=oop.colors.white)
     obj = oop.Object(W, pos=(0,0))
     
-    image = oop.image_tools.load_image("/home/luca/Documents/Coding/Python/OOPygameProject/oopygame/platform.png")
     image = oop.image_tools.scale_image(image, (500,128))
     platform = oop.Object(W, pos=(-80,372), image=image)
     clock = oop.time.Clock(60, W)

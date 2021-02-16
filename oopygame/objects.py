@@ -20,6 +20,9 @@ from . import image_tools
 default_image_fn = f"{'/'.join(__file__.split('/')[:-1])}/icon.svg"
 default_image = image_tools.load_image(default_image_fn)
 
+platform_image_fn = f"{'/'.join(__file__.split('/')[:-1])}/platform.png"
+platform_image = image_tools.load_image(platform_image_fn)
+
 x = 0
 y = 1
 
