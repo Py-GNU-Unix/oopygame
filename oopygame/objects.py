@@ -269,6 +269,9 @@ class PercentedObject(Object):
         self.size = new_size
 
 class ShadowObject(Object):
+    """
+    Only for debugging
+    """
     def __init__(self, *args, **kwargs):
         Object.__init__(self, *args, **kwargs)
         rect = self.get_rect()
