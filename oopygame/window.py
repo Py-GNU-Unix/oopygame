@@ -153,13 +153,13 @@ class BaseWindow:
 class Window(BaseWindow):
     def __init__(self, size=(500, 500), pos=None, icon=default_icon,
                  flags=common_window_flags, title=None, 
-                 bg_color=colors.black, daemons=[]):
+                 bg_color=colors.black, demons=[]):
                      
         BaseWindow.__init__(self, size=size, pos=pos, flags=flags)
         self.set_icon(icon)
         self.bg_color = bg_color
         self.events = ()
-        self.daemons = daemons
+        self.demons = demons
 
         if not title:
             title = Window.generate_default_title()
@@ -169,7 +169,7 @@ class Window(BaseWindow):
 
     def update(self, blit_objs=True):
         self.update_events()
-        self.exec_daemons()
+        self.exec_demons()
         self.clear_screen(self.bg_color)
         self.blit_objects()
         pygame.display.update()
@@ -211,12 +211,12 @@ class Window(BaseWindow):
 
     # <><><><><><><><>#
     
-    def exec_daemons(self):
-        for daem in self.daemons:
-            daem()
+    def exec_demons(self):
+        for dem in self.demons:
+            dem()
     
-    def add_daemon(self, new_daemon):
-        self.daemons.append(new_daemon)
+    def add_demon(self, new_demon):
+        self.demons.append(new_demon)
     
-    def remove_daemon(self, daemon_to_remove):
-        return self.daemons.remove(daemon_to_remove)
+    def remove_demon(self, demon_to_remove):
+        return self.demons.remove(demon_to_remove)

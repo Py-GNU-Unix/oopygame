@@ -26,8 +26,8 @@ if __name__ == "__main__":
     platform = oop.Object(W, pos=(-80,372), image=image)
     clock = oop.time.Clock(60, W)
 
-    daem = oop.daemons.gravity(obj, platforms=[platform])
-    W.add_daemon(daem)
+    dem = oop.demons.gravity(obj, platforms=[platform])
+    W.add_demon(dem)
         
     while True:
         if W.detect_key(pygame.K_RIGHT):

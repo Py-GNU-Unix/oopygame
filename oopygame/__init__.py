@@ -20,4 +20,4 @@ from .objects import Object, BaseObject, SvgObject, PercentedObject, ShadowObjec
 from . import time
 from . import image_tools
 from . import colors
-from . import daemons
+from . import demons
