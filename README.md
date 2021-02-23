@@ -27,7 +27,7 @@ The installation of this module is very simple.
 ```bash
 git clone https://github.com/Py-GNU-Unix/oopygame.git #or anyother equivalent command
 cd oopygame
-pip install .
+pip3 install .
 ```
 
 
@@ -35,7 +35,7 @@ pip install .
 and for removing
 
 ```pip
-pip uninstall oopygame
+pip3 uninstall oopygame
 ```
 
 
