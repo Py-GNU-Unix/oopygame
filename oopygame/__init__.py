@@ -13,6 +13,13 @@
 # ~ You should have received a copy of the GNU General Public License
 # ~ along with oopygame.  If not, see <https://www.gnu.org/licenses/>.
 
+"""
+This is an object oriented API based on pygame
+"""
+
+__version__ = "0.1.1"
+__author__ = 'Py-GNU-Unix'
+
 class OOPyException(Exception):     pass
 
 from .window import Window, BaseWindow

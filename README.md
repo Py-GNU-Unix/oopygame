@@ -18,6 +18,26 @@ That's an object oriented API for pygame. You can create great programs without 
 
 * Anyother OS wich has xdpyinfo, awk, and bash tools (I think that you can byepass it on windows too, but we're not interesed)
 
+---
+
+## Installation
+
+The installation of this module is very simple.
+
+```bash
+git clone https://github.com/Py-GNU-Unix/oopygame.git #or anyother equivalent command
+cd oopygame
+pip install .
+```
+
+
+
+and for removing
+
+```pip
+pip uninstall oopygame
+```
+
 
 
 ## Modules
@@ -38,13 +58,9 @@ oopygame/
   └── window.py
 ```
 
-
-
 #### colors.py
 
 The colors.py module, contains some color tuples like white(255, 255, 255), black(0, 0, 0), red, green, and many others.
-
-
 
 #### demons.py
 
@@ -57,25 +73,17 @@ win.add_demon(dem)
 
 When you will call the `win.do_routine()` method, this demon will be executed, but it should be a callable object. (So, if is it a class, it should have a \_\_call\_\_ method)
 
-
-
 #### icon.svg, icon.ico and platfrom.png
 
 Only some default images and icons.
-
-
 
 #### image_tools.py
 
 In this module are contained some functions to work with images. For example, there is the `load_image(filename, fit_to=False)` function, that load an image and transform it in a pygame.Surface object. It supports .svg too. Others functions are scale_image, chop_image, rotate_image and roto_zoom_image.
 
-
-
 #### \_\_init\_\_.py
 
 The initzializer file.
-
-
 
 #### objects.py
 
@@ -89,13 +97,9 @@ In objects.py are containes some object-like classes. You can add them in a wind
 
 * PercentedObject --> The position of this object is defined by a percentual, not by pixels. 
 
-
-
 #### time.py
 
 This module contains the Clock class. it sets up FPS, but when it's waiting, it allows to pygame to communicate with the enviroment. So, if you sets 1 (for example) FPS, you 'll have a reactive window despite.
-
-
 
 #### window.py
 
