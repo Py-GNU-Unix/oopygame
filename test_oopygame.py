@@ -16,32 +16,32 @@
 import oopygame as oop
 import pygame
 from oopygame.objects import  platform_image as image
-        
+
 
 if __name__ == "__main__":
     W = oop.Window(flags=pygame.DOUBLEBUF, bg_color=oop.colors.white)
     obj = oop.Object(W, pos=(0,0))
-    
+
     image = oop.image_tools.scale_image(image, (500,128))
     platform = oop.Object(W, pos=(-80,372), image=image)
     clock = oop.time.Clock(60, W)
 
     dem = oop.demons.gravity(obj, platforms=[platform])
     W.add_demon(dem)
-        
+
+    dem2 = oop.demons.OnObjectClick(obj, action=lambda:print("hi"))
+    W.add_demon(dem2)
+
     while True:
         if W.detect_key(pygame.K_RIGHT):
             obj.move_right(2)
-        
+
         if W.detect_key(pygame.K_LEFT):
             obj.move_left(2)
-        
+
         if W.detect_key(pygame.K_UP):
             obj.move_up(8)
-            
-        
+
+
         W.do_routine()
         clock.tick()
-        
-
-        
