@@ -78,8 +78,8 @@ class OnObjectEvent(OnEvent):
 
 class OnObjectClick(OnObjectEvent):
     def __init__(self, object, action):
-        OnObjectEvent.__init__(object.is_clicked, action)
+        OnObjectEvent.__init__(self, object.is_clicked, action)
 
 class OnObjectUnderCursor(OnObjectEvent):
     def __init__(self, object, action):
-        OnObjectEvent.__iit__(object.is_under_cursor, action)
+        OnObjectEvent.__init__(self, object.is_under_cursor, action)
