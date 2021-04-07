@@ -23,3 +23,37 @@ aqua =          (25, 255, 255)
 dark_green =    (000, 112, 000)
 orange =        (255, 128, 000)
 magenta =       (255, 000, 255)
+
+def make_lighter(color, how_much):
+    color = list(color)
+
+    def add_how_much(number):
+        return number + how_much
+
+    def validate(number):
+        if number > 255:
+            return number - 255
+        else:
+            return number
+
+    color = map(add_how_much, color)
+    color = map(validate, color)
+
+    return color
+
+def make_darker(color, how_much):
+    color = list(color)
+
+    def sottract_how_much(number):
+        return number - how_much
+
+    def validate(number):
+        if number < 0:
+            return 255 + number
+        else:
+            return number
+
+    color = map(sottract_how_much, color)
+    color = map(validate, color)
+
+    return color
