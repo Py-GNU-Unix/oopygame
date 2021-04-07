@@ -39,7 +39,7 @@ def make_lighter(color, how_much):
     color = map(add_how_much, color)
     color = map(validate, color)
 
-    return color
+    return list(color)
 
 def make_darker(color, how_much):
     color = list(color)
@@ -56,4 +56,4 @@ def make_darker(color, how_much):
     color = map(sottract_how_much, color)
     color = map(validate, color)
 
-    return color
+    return list(color)
