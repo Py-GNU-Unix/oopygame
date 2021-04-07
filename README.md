@@ -60,7 +60,7 @@ oopygame/
 
 #### colors.py
 
-The colors.py module, contains some color tuples like white(255, 255, 255), black(0, 0, 0), red, green, and many others.
+The colors.py module, contains some color tuples like white, black or green and some tools for making these tuple more lighter or darker.
 
 #### demons.py
 
