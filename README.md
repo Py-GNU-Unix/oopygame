@@ -1,7 +1,5 @@
 # oopygame
 
-![License GPL](https://img.shields.io/github/license/mashape/apistatus.svg)
-
 An object oriented api based on pygame
 
 ---
