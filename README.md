@@ -1,6 +1,6 @@
 # oopygame
 
-![This repo is mainly written in python](https://img.shields.io/badge/python-this%20repo%20is%20mainly%20written%20in%20python-blue)
+![License GPL](https://img.shields.io/github/license/mashape/apistatus.svg)
 
 An object oriented api based on pygame
 
