@@ -1,5 +1,7 @@
 # oopygame
 
+![This repo is mainly written in python](https://img.shields.io/badge/python-this%20repo%20is%20mainly%20written%20in%20python-blue)
+
 An object oriented api based on pygame
 
 ---
