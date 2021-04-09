@@ -6,9 +6,9 @@ An object oriented api based on pygame
 
 ---
 
-## Brief description:
+### Brief description
 
-That's an object oriented API for pygame. You can create great programs without many code. This API can be modded with daemons and childs classes. Basically you create a Window with a class (BaseWindow, Window), and you put in it some object istances (of the classes BaseObject, Object, SvgObject, PercentedObject...). The window will display them, and when you will run " yourwindow.do_routine() ", the window will update the image.
+That's an Object-oriented API based on pygame. The goal of this library is help to create great programs in less time as possible. This library is easly extendible with demon and subclasses.
 
 ---
 
@@ -27,77 +27,14 @@ That's an object oriented API for pygame. You can create great programs without 
 The installation of this module is very simple.
 
 ```bash
-git clone https://github.com/Py-GNU-Unix/oopygame.git #or anyother equivalent command
-cd oopygame
-pip3 install .
+pip3 install git+https://github.com/Py-GNU-Unix/oopygame.git
 ```
-
-
 
 and for removing
 
 ```pip
 pip3 uninstall oopygame
 ```
-
-
-
-## Modules
-
-These are the principal oopygame files
-
-```tree
-oopygame/
-  ├── colors.py
-  ├── demons.py
-  ├── icon.ico
-  ├── icon.svg
-  ├── image_tools.py
-  ├── __init__.py
-  ├── objects.py
-  ├── platform.png
-  ├── time.py
-  └── window.py
-```
-
-#### colors.py
-
-The colors.py module, contains some color tuples like white, black or green and some tools for making these tuple more lighter or darker.
-
-#### demons.py
-
-The demons.py module, contains some demons that can be added to your code. To add them in a window:
-
-```python
-dem = DemonClass(*args, **kwargs)
-win.add_demon(dem)
-```
-
-When you will call the `win.do_routine()` method, this demon will be executed, but it should be a callable object. (So, if is it a class, it should have a \_\_call\_\_ method)
-
-#### icon.svg, icon.ico and platfrom.png
-
-Only some default images and icons.
-
-#### image_tools.py
-
-In this module are contained some functions to work with images. For example, there is the `load_image(filename, fit_to=False)` function, that load an image and transform it in a pygame.Surface object. It supports .svg too. Others functions are scale_image, chop_image, rotate_image and roto_zoom_image.
-
-#### \_\_init\_\_.py
-
-The initzializer file.
-
-#### objects.py
-
-In objects.py are containes some object-like classes. You can add them in a window, with the `win.add_object` method. The displayed object will be updated when you 'll run `win.do_routine()` (with the other objects too). There are many kind of object, like:
-
-* BaseObject --> a basic object with basic functions
-
-* Object --> A normal object
-
-* SvgObject --> A object that 's a well support for svg images. It reload its evry time that it's resized.
-
-* PercentedObject --> The position of this object is defined by a percentual, not by pixels. 
 
 #### time.py
 
