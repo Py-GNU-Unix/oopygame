@@ -17,14 +17,15 @@
 This is an object oriented API based on pygame
 """
 
-__version__ = "0.1.1"
 __author__ = 'Py-GNU-Unix'
 
 class OOPyException(Exception):     pass
 
 from .window import Window, BaseWindow
 from .objects import Object, BaseObject, SvgObject, PercentedObject, ShadowObject
+from .text import Text
 from . import time
 from . import image_tools
 from . import colors
 from . import demons
+from . import text

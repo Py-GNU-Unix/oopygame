@@ -35,7 +35,7 @@ class BaseWindow:
     def __init__(self, size=(500, 500), flags=0, pos=None):
         self.open_size = size
         self.flags = flags
-        
+
         self.screen = NotInizializedScreen()
         self.objects = {}
 
@@ -105,11 +105,16 @@ class BaseWindow:
 
         for depth_level in depth_levels_list:
             objects_on_this_level = self.objects[depth_level]
+            objects_on_this_level = self.remove_invisible_objects(objects_on_this_level)
 
             for object_to_blit in objects_on_this_level:
                 object_position = object_to_blit.get_real_pos()
                 object_image = object_to_blit.get_image()
                 self.screen.blit(object_image, object_position)
+
+    @staticmethod
+    def remove_invisible_objects(list):
+        return [object for object in list if object.show]
 
     # <><><><><><><><>#
 
@@ -152,9 +157,9 @@ class BaseWindow:
 
 class Window(BaseWindow):
     def __init__(self, size=(500, 500), pos=None, icon=default_icon,
-                 flags=common_window_flags, title=None, 
+                 flags=common_window_flags, title=None,
                  bg_color=colors.black, demons=[]):
-                     
+
         BaseWindow.__init__(self, size=size, pos=pos, flags=flags)
         self.set_icon(icon)
         self.bg_color = bg_color
@@ -173,8 +178,8 @@ class Window(BaseWindow):
         self.clear_screen(self.bg_color)
         self.blit_objects()
         pygame.display.update()
-        
-        
+
+
     @staticmethod
     def generate_default_title():
         import __main__
@@ -182,7 +187,7 @@ class Window(BaseWindow):
         return base_file + " - OOPygame"
 
     # <><><><><><><><>#
-    
+
     def px_to_perc(self, n_pixels, mode, round_func=int):
         mode = 0 if mode == "x" else 1
         window_size = self.get_window_size()
@@ -200,23 +205,23 @@ class Window(BaseWindow):
     def update_events(self, cache_func=False):
         if cache_func:
             cache_func(self.events)
-        
+
         new_events = pygame.event.get()
         self.events = new_events
-    
+
     def get_events(self, eventtype=None):
         for event in self.events:
             if not eventtype or event.type==eventtype:
                 yield event
 
     # <><><><><><><><>#
-    
+
     def exec_demons(self):
         for dem in self.demons:
             dem()
-    
+
     def add_demon(self, new_demon):
         self.demons.append(new_demon)
-    
+
     def remove_demon(self, demon_to_remove):
         return self.demons.remove(demon_to_remove)

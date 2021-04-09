@@ -75,8 +75,9 @@ class BaseObject:
 
 class Object(BaseObject):
     def __init__(self, master_window, pos=(0,0), depth_level=0,
-            image=default_image, size=None):
+            image=default_image, size=None, show=True):
 
+        self.show = show
         BaseObject.__init__(
             self, pos=pos, depth_level=depth_level, image=image)
 
@@ -84,7 +85,7 @@ class Object(BaseObject):
 
         if size:
             self.size = size
-            self.image = image_tools.scale(self.image, size)
+            self.image = image_tools.scale_image(self.image, size)
         else:
             self.size = image.get_size()
 
