@@ -201,13 +201,13 @@ class Object(BaseObject):
 
 class SvgObject(Object):
     def __init__(self, master_window, filename=default_image_fn,
-            pos=(0,0), depth_level=0, size=None):
+            pos=(0,0), depth_level=0, size=None, *args, **kwargs):
 
         image = image_tools.load_svg(filename, size)
         self.filename = filename
 
         Object.__init__(self, master_window=master_window, pos=pos,
-            image=image, depth_level=depth_level, size=size)
+            image=image, depth_level=depth_level, size=size, *args, **kwargs)
 
     def set_size(self, new_size):
         self.size = new_size
@@ -227,7 +227,7 @@ class PercentedObject(Object):
             image=default_image, size=None):
 
         BaseObject.__init__(
-            self, pos=pos, depth_level=depth_level, image=image)
+            self, pos=pos, depth_level=depth_level, image=image, *args, **kwargs)
 
         self.set_master_window(master_window)
         if not size:
