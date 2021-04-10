@@ -10,7 +10,7 @@ An object oriented api based on pygame
 
 That's an Object-oriented API based on pygame. The goal of this library is help to create great programs in less time as possible. This library is easly extendible with demon and subclasses.
 
-<img title="" src="clip.gif" alt="example" width="215" align="center"><img title="" src="screenshot.png" alt="screenshot.png" width="434" align="center" style="border: 1px solid"> 
+<img title="" src="media/clip.gif" alt="example" width="242" align="center"><img title="" src="media/screenshot.png" alt="screenshot.png" width="402" align="center" style="border: 1px solid"> 
 
 ---
 
