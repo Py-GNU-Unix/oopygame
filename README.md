@@ -1,8 +1,15 @@
-# oopygame
+<p align="center">
+  <img title="oopygame" src="media/icon.svg" alt="icon.svg" width="125"/>
+  <h1 align="center">oopygame</h1>
+  <h5 align="center">An object oriented api based on pygame 💣🖥️🚀</h5>
+</p>
 
-An object oriented api based on pygame
-
-![GitHub top language](https://img.shields.io/github/languages/top/Py-GNU-Unix/oopygame?color=blueviolet&style=flat-square) ![GitHub repo size](https://img.shields.io/github/repo-size/Py-GNU-Unix/oopygame?style=flat-square) ![GitHub release (latest by date)](https://img.shields.io/github/v/release/Py-GNU-Unix/oopygame?color=yellow&style=flat-square) ![GitHub](https://img.shields.io/github/license/Py-GNU-Unix/oopygame?color=dark-green&style=flat-square)
+<p align="center">
+  <img src="https://img.shields.io/github/languages/top/Py-GNU-Unix/oopygame?color=blueviolet&style=flat-square"/>
+  <img src="https://img.shields.io/github/repo-size/Py-GNU-Unix/oopygame?style=flat-square"/>
+  <img src="https://img.shields.io/github/v/release/Py-GNU-Unix/oopygame?color=yellow&style=flat-square"/>
+  <img src="https://img.shields.io/github/license/Py-GNU-Unix/oopygame?color=dark-green&style=flat-square"/>
+</p>
 
 ---
 
@@ -10,7 +17,13 @@ An object oriented api based on pygame
 
 That's an Object-oriented API based on pygame. The goal of this library is help to create great programs in less time as possible. This library is easly extendible with demon and subclasses.
 
-<img title="" src="clip.gif" alt="example" width="215" align="center"><img title="" src="screenshot.png" alt="screenshot.png" width="434" align="center" style="border: 1px solid"> 
+<div align="center">
+<table><tr><td>
+  <img title="" src="media/clip.gif" alt="example" height="230">
+  </td><td>
+  <img title="" src="media/screenshot.png" alt="screenshot.png" height="230">
+</td></tr></table>
+</div>
 
 ---
 
