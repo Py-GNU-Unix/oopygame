@@ -17,14 +17,13 @@
 
 That's an Object-oriented API based on pygame. The goal of this library is help to create great programs in less time as possible. This library is easly extendible with demon and subclasses.
 
-<p align="center">
-  <table align="center"><tr><td>
-    <img title="" src="media/clip.gif" alt="example" height="230" align="center">
-    </td><td>
-    <img title="" src="media/screenshot.png" alt="screenshot.png" height="230" align="center" style="border: 1px solid">
-  </td></tr></table>
-</p>
-
+<div align="center">
+<table><tr><td>
+  <img title="" src="media/clip.gif" alt="example" height="230">
+  </td><td>
+  <img title="" src="media/screenshot.png" alt="screenshot.png" height="230">
+</td></tr></table>
+</div>
 ---
 
 ### Supported platforms:
