@@ -10,17 +10,19 @@ An object oriented api based on pygame
 
 That's an Object-oriented API based on pygame. The goal of this library is help to create great programs in less time as possible. This library is easly extendible with demon and subclasses.
 
-<img title="" src="clip.gif" alt="example" width="215" align="center"><img title="" src="screenshot.png" alt="screenshot.png" width="434" align="center"> 
+<img title="" src="clip.gif" alt="example" width="215" align="center"><img title="" src="screenshot.png" alt="screenshot.png" width="434" align="center" style="border: 1px solid"> 
 
 ---
 
 ### Supported platforms:
 
-* GNU/Linux
+- GNU/Linux (both wayland and xorg)
 
-* BSD
+- BSD (both wayland and xorg)
 
-* Anyother OS wich has xdpyinfo, awk, and bash tools (I think that you can byepass it on windows too, but we're not interesed)
+- Windows (99%)
+
+- OS X (99%)
 
 ---
 
