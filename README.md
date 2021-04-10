@@ -17,9 +17,11 @@
 
 That's an Object-oriented API based on pygame. The goal of this library is help to create great programs in less time as possible. This library is easly extendible with demon and subclasses.
 
-<kbd>
-  <img title="" src="media/clip.gif" alt="example" height="237" align="center"> <img title="" src="media/screenshot.png" alt="screenshot.png" height="237" align="center" style="border: 1px solid">
-</kbd>
+<table><tr><td>
+  <img title="" src="media/clip.gif" alt="example" height="230" align="center">
+  </td><td>
+  <img title="" src="media/screenshot.png" alt="screenshot.png" height="230" align="center" style="border: 1px solid">
+</td></tr></table>
 
 ---
 
