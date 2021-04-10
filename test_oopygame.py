@@ -14,6 +14,7 @@
 # ~ along with oopygame.  If not, see <https://www.gnu.org/licenses/>.
 
 import oopygame as oop
+import pygame
 
 W = oop.Window(flags=pygame.DOUBLEBUF, bg_color=oop.colors.white)
 clock = oop.time.Clock(FPS=120, window=W)
