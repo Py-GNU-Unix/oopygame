@@ -24,6 +24,7 @@ That's an Object-oriented API based on pygame. The goal of this library is help 
   <img title="" src="media/screenshot.png" alt="screenshot.png" height="230">
 </td></tr></table>
 </div>
+
 ---
 
 ### Supported platforms:
