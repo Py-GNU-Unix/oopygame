@@ -15,37 +15,18 @@
 
 import oopygame as oop
 import pygame
-from oopygame.objects import  platform_image as image
-
 
 if __name__ == "__main__":
-    W = oop.Window(flags=pygame.DOUBLEBUF|pygame.RESIZABLE, bg_color=oop.colors.white)
-    # obj = oop.Object(W, pos=(0,0))
-    #
-    # image = oop.image_tools.scale_image(image, (500,128))
-    # platform = oop.Object(W, pos=(-80,372), image=image)
-    # clock = oop.time.Clock(60, W)
-    #
-    # dem = oop.demons.gravity(obj, platforms=[platform])
-    # W.add_demon(dem)
-    #
-    # dem2 = oop.demons.OnObjectClick(obj, action=lambda:print("hi"))
-    # W.add_demon(dem2)
-    #
-    # while True:
-    #     if W.detect_key(pygame.K_RIGHT):
-    #         obj.move_right(2)
-    #
-    #     if W.detect_key(pygame.K_LEFT):
-    #         obj.move_left(2)
-    #
-    #     if W.detect_key(pygame.K_UP):
-    #         obj.move_up(8)
-    #
-    #
-    #     W.do_routine()
-    #     clock.tick()
-    Text = oop.Text(W, "try fsdf fsd ds fds f ds fds f ds fds f ds f dsf  fsd  fdsfdsfds  sfd f sd f  fsdfsdfsdfsd  dsf ds f ds     fsdfsdfsd fds f dsf ds fffffsd f ds fds f ds fs f ds fs f ds fds f sf dsf ds f dsf s f sd fs df sd   fds fds f ds fs")
+    W = oop.Window(flags=pygame.DOUBLEBUF, bg_color=oop.colors.white)
+    clock = oop.time.Clock(FPS=120, window=W)
+    obj = oop.Object(W, pos=(0, 250))
+
+    restart_pos = (0-obj.get_image().get_width(), 250)
 
     while True:
+        obj.move_right(4)
+        if obj.is_out_of_window() and not obj.is_touching_borders():
+            obj.set_pos(restart_pos)
+
+        clock.tick()
         W.do_routine()
