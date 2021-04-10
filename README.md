@@ -1,5 +1,5 @@
 <p align="center">
-  <img title="oopygame" src="media/icon.svg" alt="icon.svg"/>
+  <img title="oopygame" src="media/icon.svg" alt="icon.svg" width="150">
   <h1>oopygame</h1>
   <h5>An object oriented api based on pygame</h5>
 </p>
