@@ -112,7 +112,8 @@ class Object(BaseObject):
 
     def set_master_window(self, new_master):
         self.master_window = new_master
-        self.master_window.add_object(self)
+        if master_window:
+            self.master_window.add_object(self)
 
 #<><><><><><><><>#
 
