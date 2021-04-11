@@ -23,6 +23,7 @@ aqua =          (25, 255, 255)
 dark_green =    (000, 112, 000)
 orange =        (255, 128, 000)
 magenta =       (255, 000, 255)
+yellow =        (255, 255, 0)
 
 def make_lighter(color, how_much):
     color = list(color)
@@ -32,7 +33,7 @@ def make_lighter(color, how_much):
 
     def validate(number):
         if number > 255:
-            return number - 255
+            return 255
         else:
             return number
 
@@ -49,7 +50,7 @@ def make_darker(color, how_much):
 
     def validate(number):
         if number < 0:
-            return 255 + number
+            return 0
         else:
             return number
 
