@@ -59,8 +59,6 @@ class BaseObject:
         self.pos = new_pos
 
     def set_size(self, new_size):
-        print(f"set_size method is deprecated for {self.__class__}", file=sys.stderr)
-
         self.size = new_size
         new_image = image_tools.scale_image(self.image, new_size)
         self.set_image(new_image)
@@ -82,12 +80,7 @@ class Object(BaseObject):
             self, pos=pos, depth_level=depth_level, image=image)
 
         self.set_master_window(master_window)
-
-        if size:
-            self.size = size
-            self.image = image_tools.scale_image(self.image, size)
-        else:
-            self.size = image.get_size()
+        self.deduce_dinamic_size(size)
 
 #<><><><><><><><>#
 
@@ -196,6 +189,25 @@ class Object(BaseObject):
         my_side = pygame.Rect(my_real_pos, my_real_size)
 
         return my_side
+
+    def deduce_dinamic_size(self, size):
+        if size:
+            self.size = size
+            self.image = image_tools.scale_image(self.image, size)
+            self.dinamic_size = False
+        else:
+            self.size = self.image.get_size()
+            self.dinamic_size = True
+
+    def set_dinamic_size(self, value):
+        self.dinamic_size = value
+
+    def set_image(self, image):
+        if self.dinamic_size:
+            self.image = image
+            self.set_real_size(image.get_size())
+        else:
+            self.image = oop.image_tools.scale_image(image, self.size)
 
 
 #°*°*°*°*°*°*°*°*°*°*°*°*°*°*°*#
