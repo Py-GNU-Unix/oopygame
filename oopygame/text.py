@@ -19,7 +19,10 @@ import pygame
 import math
 
 class Text(objects.Object):
-    def __init__(self, master_window, text, size=(900, 300), color=(0, 0, 0), pos=(0, 0), font=pygame.font.SysFont(None, 24), padding=(20, 20), truncate_words=False):
+    def __init__(self, master_window, text, size=(900, 300), color=(0, 0, 0),
+            pos=(0, 0), font=pygame.font.SysFont(None, 24), padding=(20, 20),
+            truncate_words=False, *args, **kwargs):
+
         self.text = text
         self.color = color
         self.size = size
