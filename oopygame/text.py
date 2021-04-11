@@ -31,7 +31,7 @@ class Text(objects.Object):
         self.truncate_words = truncate_words
 
         objects.Object.__init__(self, master_window, pos,
-            image=self.generate_text_surface(), *args; **kwargs)
+            image=self.generate_text_surface(), *args, **kwargs)
 
     def generate_text_surface(self):
         max_chars_for_line = self.calc_max_chars_for_line()
