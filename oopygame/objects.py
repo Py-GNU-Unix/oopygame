@@ -155,6 +155,10 @@ class Object(BaseObject):
 
     def is_under_cursor(self):
         choords_mouse = pygame.mouse.get_pos()
+
+        if not self.master_window.is_the_cursor_in_this_window()
+            return False
+            
         my_rect = self.get_rect()
         return my_rect.collidepoint(choords_mouse)
 

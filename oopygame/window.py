@@ -124,6 +124,10 @@ class BaseWindow:
         size = map(int, size.split("x"))
         return list(size)
 
+    @staticmethod
+    def is_the_cursor_in_this_window():
+        return pygame.mouse.get_focused()
+
     def get_window_size(self):
         return pygame.display.get_surface().get_size()
 
