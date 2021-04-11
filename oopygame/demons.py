@@ -83,3 +83,8 @@ class OnObjectClick(OnObjectEvent):
 class OnObjectUnderCursor(OnObjectEvent):
     def __init__(self, object, action):
         OnObjectEvent.__init__(self, object.is_under_cursor, action)
+
+class OnObjectNotUnderCursor(OnObjectEvent):
+    def __init__(self, object, action):
+        event = lambda: not object.is_under_cursor()
+        OnObjectEvent.__init__(self, event, action)
