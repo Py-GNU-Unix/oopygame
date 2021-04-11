@@ -19,7 +19,10 @@ import pygame
 import math
 
 class Text(objects.Object):
-    def __init__(self, master_window, text, size=(900, 300), color=(0, 0, 0), pos=(0, 0), font=pygame.font.SysFont(None, 24), padding=(20, 20), truncate_words=False):
+    def __init__(self, master_window, text, size=(900, 300), color=(0, 0, 0),
+            pos=(0, 0), font=pygame.font.SysFont(None, 24), padding=(20, 20),
+            truncate_words=False, *args, **kwargs):
+
         self.text = text
         self.color = color
         self.size = size
@@ -48,10 +51,10 @@ class Text(objects.Object):
         return surface.convert_alpha()
 
     def blit_text_on_surface(self, surface, text):
-        y = 0
+        x, y = self.padding
         for line in text.splitlines():
             line_text_surface = self.font.render(line, True, self.color)
-            surface.blit(line_text_surface, (0, y))
+            surface.blit(line_text_surface, (x, y))
             y += line_text_surface.get_height()
 
     def get_arranged_text(self, max_chars_for_line):
