@@ -205,7 +205,7 @@ class Object(BaseObject):
     def set_image(self, image):
         if self.dinamic_size:
             self.image = image
-            self.set_real_size(image.get_size())
+            self.size = image.get_size()
         else:
             self.image = oop.image_tools.scale_image(image, self.size)
 
