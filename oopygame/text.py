@@ -48,10 +48,10 @@ class Text(objects.Object):
         return surface.convert_alpha()
 
     def blit_text_on_surface(self, surface, text):
-        y = 0
+        x, y = self.padding
         for line in text.splitlines():
             line_text_surface = self.font.render(line, True, self.color)
-            surface.blit(line_text_surface, (0, y))
+            surface.blit(line_text_surface, (x, y))
             y += line_text_surface.get_height()
 
     def get_arranged_text(self, max_chars_for_line):
