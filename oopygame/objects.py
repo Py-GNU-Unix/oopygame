@@ -104,9 +104,15 @@ class Object(BaseObject):
 #<><><><><><><><>#
 
     def set_master_window(self, new_master):
+        if new_master != None:
+            self.master_window.remove_object(self)
+            new_master.add_object(self)
+
         self.master_window = new_master
-        if new_master:
-            self.master_window.add_object(self)
+
+    def delete(self):
+        self.master_window.remove_object(self)
+        del(self)
 
 #<><><><><><><><>#
 
@@ -158,7 +164,7 @@ class Object(BaseObject):
 
         if not self.master_window.is_the_cursor_in_this_window()
             return False
-            
+
         my_rect = self.get_rect()
         return my_rect.collidepoint(choords_mouse)
 
