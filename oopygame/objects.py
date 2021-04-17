@@ -105,7 +105,12 @@ class Object(BaseObject):
 
     def set_master_window(self, new_master):
         if new_master != None:
-            self.master_window.remove_object(self)
+            try:
+                self.master_window.remove_object(self)
+            except AttributeError:
+                pass
+                # The window hasn't been already setted
+
             new_master.add_object(self)
 
         self.master_window = new_master
@@ -162,7 +167,7 @@ class Object(BaseObject):
     def is_under_cursor(self):
         choords_mouse = pygame.mouse.get_pos()
 
-        if not self.master_window.is_the_cursor_in_this_window()
+        if not self.master_window.is_the_cursor_in_this_window():
             return False
 
         my_rect = self.get_rect()
