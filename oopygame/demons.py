@@ -69,6 +69,9 @@ class OnEvent:
         self.event = event
         self.action = action
 
+    def set_action(self, action):
+        self.action = action
+
     def __call__(self):
         if self.event():
             self.action()
