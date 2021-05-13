@@ -13,6 +13,8 @@
 # ~ You should have received a copy of the GNU General Public License
 # ~ along with oopygame.  If not, see <https://www.gnu.org/licenses/>.
 
+# Copyright 2020-present Py-GNU-Unix <py.gnu.unix.moderator@gmail.com>
+
 import pygame
 import sys
 import os

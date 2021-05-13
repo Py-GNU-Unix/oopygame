@@ -13,6 +13,8 @@
 # ~ You should have received a copy of the GNU General Public License
 # ~ along with oopygame.  If not, see <https://www.gnu.org/licenses/>.
 
+# Copyright 2020-present Py-GNU-Unix <py.gnu.unix.moderator@gmail.com>
+
 white = (255, 255, 255)
 black = (000, 000, 000)
 red   = (255, 000, 000)
