@@ -13,8 +13,10 @@
 # ~ You should have received a copy of the GNU General Public License
 # ~ along with oopygame.  If not, see <https://www.gnu.org/licenses/>.
 
-import oopygame as oop
+# Copyright 2020-present Py-GNU-Unix <py.gnu.unix.moderator@gmail.com>
+
 import pygame
+import oopygame as oop
 
 W = oop.Window(flags=pygame.DOUBLEBUF, bg_color=oop.colors.white)
 clock = oop.time.Clock(FPS=120, window=W)
