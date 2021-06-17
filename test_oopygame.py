@@ -15,19 +15,4 @@
 
 # Copyright 2020-present Py-GNU-Unix <py.gnu.unix.moderator@gmail.com>
 
-import pygame
-import oopygame as oop
-
-W = oop.Window(flags=pygame.DOUBLEBUF, bg_color=oop.colors.white)
-clock = oop.time.Clock(FPS=120, window=W)
-obj = oop.Object(W, pos=(0, 250))
-
-restart_pos = (0-obj.get_image().get_width(), 250)
-
-while True:
-    obj.move_right(4)
-    if obj.is_out_of_window() and not obj.is_touching_borders():
-        obj.set_pos(restart_pos)
-
-    clock.tick()
-    W.do_routine()
+# NO TEST SCRIPT FOR THIS MINOR RELEASE

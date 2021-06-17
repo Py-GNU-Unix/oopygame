@@ -15,25 +15,44 @@
 
 # Copyright 2020-present Py-GNU-Unix <py.gnu.unix.moderator@gmail.com>
 
-import sys
 import pygame
 from . import image_tools
 
-default_image_fn = f"{'/'.join(__file__.split('/')[:-1])}/icon.svg"
+default_image_fn = f"{'/'.join(__file__.split('/')[:-1])}/media/icon.svg"
 default_image = image_tools.load_image(default_image_fn)
 
-platform_image_fn = f"{'/'.join(__file__.split('/')[:-1])}/platform.png"
-platform_image = image_tools.load_image(platform_image_fn)
-
-x = 0
-y = 1
+X = 0
+Y = 1
 
 
-class BaseObject:
-    def __init__(self, pos=(0,0), depth_level=0, image=default_image):
+class Object:
+    def __init__(self, master_window, pos=(0,0), image=default_image, show=True, depth_level=0):
+        self.show = show
         self.pos = pos
         self.image = image
+        self.size = self.image.get_size()
         self.depth_level = depth_level
+        self.master_window = None
+        self.set_master_window(master_window)
+
+#<><><><><><><><>#
+
+    def move_right(self, px):
+        current_pos = self.get_pos()
+        self.set_pos((current_pos[X] + px, current_pos[Y]))
+
+    def move_left(self, px):
+        current_pos = self.get_pos()
+        self.set_pos((current_pos[X] - px, current_pos[Y]))
+
+    def move_up(self, px):
+        current_pos = self.get_pos()
+
+        self.set_pos((current_pos[X], current_pos[Y] - px))
+
+    def move_down(self, px):
+        current_pos = self.get_pos()
+        self.set_pos((current_pos[X], current_pos[Y] + px))
 
 #<><><><><><><><>#
 
@@ -71,55 +90,18 @@ class BaseObject:
     set_real_size = set_size
     get_real_size = get_size
 
-#°*°*°*°*°*°*°*°*°*°*°*°*°*°*°*#
-
-class Object(BaseObject):
-    def __init__(self, master_window, pos=(0,0), depth_level=0,
-            image=default_image, size=None, show=True):
-
-        self.show = show
-        BaseObject.__init__(
-            self, pos=pos, depth_level=depth_level, image=image)
-
-        self.set_master_window(master_window)
-        self.deduce_dinamic_size(size)
-
-#<><><><><><><><>#
-
-    def move_right(self, px):
-        current_pos = self.get_pos()
-        self.set_pos((current_pos[x] + px, current_pos[y]))
-
-    def move_left(self, px):
-        current_pos = self.get_pos()
-        self.set_pos((current_pos[x] - px, current_pos[y]))
-
-    def move_up(self, px):
-        current_pos = self.get_pos()
-
-        self.set_pos((current_pos[x], current_pos[y] - px))
-
-    def move_down(self, px):
-        current_pos = self.get_pos()
-        self.set_pos((current_pos[x], current_pos[y] + px))
-
 #<><><><><><><><>#
 
     def set_master_window(self, new_master):
-        if new_master != None:
-            try:
-                self.master_window.remove_object(self)
-            except AttributeError:
-                pass
-                # The window hasn't been already setted
+        if self.master_window:
+            self.disconnect_from_master_window()
 
-            new_master.add_object(self)
-
+        new_master.add_object(self)
         self.master_window = new_master
 
-    def delete(self):
+    def disconnect_from_master_window(self):
         self.master_window.remove_object(self)
-        del(self)
+        self.master_window = None
 
 #<><><><><><><><>#
 
@@ -128,7 +110,7 @@ class Object(BaseObject):
         obj_size = self.get_real_size()
         window_size = self.master_window.get_window_size()
 
-        for choor in x,y:
+        for choor in X,Y:
             if pos[choor] < (0-obj_size[choor]):
                 return choor, pos[choor]-(0-obj_size[choor])
             if pos[choor] > window_size[choor]:
@@ -141,12 +123,13 @@ class Object(BaseObject):
         obj_size = self.get_real_size()
         window_size = self.master_window.get_window_size()
 
-        for choor in x,y:
+        for choor in X,Y:
             if pos[choor] < 0 and pos[choor] > -obj_size[choor]:
                 return True
 
             border_distance = pos[choor] - window_size[choor]
-            if border_distance < obj_size[choor] and border_distance > 0:
+
+            if 0 < border_distance < obj_size[choor]:
                 return True
 
         return False
@@ -161,10 +144,9 @@ class Object(BaseObject):
         return rects[0].colliderect(rects[1])
 
     def is_clicked(self, btn_number=0):
-        mouse_status = pygame.mouse.get_pressed()[btn_number]
+        mouse_click = pygame.mouse.get_pressed()[btn_number]
 
-        if mouse_status:
-            return self.is_under_cursor()
+        return bool(mouse_click and self.is_under_cursor())
 
     def is_under_cursor(self):
         choords_mouse = pygame.mouse.get_pos()
@@ -181,132 +163,3 @@ class Object(BaseObject):
         my_rect = pygame.Rect(my_real_pos, my_real_size)
 
         return my_rect
-
-    def get_side(self, side, side_size=5):
-        my_real_pos = self.get_real_pos()
-        my_real_size = self.get_real_size()
-
-        if side == "up":
-            my_real_size = (my_real_size[0], side_size)
-
-        elif side == "down":
-            my_real_pos = (my_real_pos[0], my_real_pos[1]+my_real_size[1]-side_size)
-            my_real_size = (my_real_size[0], side_size)
-
-        elif side == "right":
-            my_real_pos = (my_real_pos[0]+my_real_size[0], my_real_pos[1]-side_size)
-            my_real_size = (side_size, my_real_size[1])
-
-        elif side == "left":
-            my_real_size = (side_size, my_real_size[0])
-
-        else:
-            raise TypeError(f"unknow side {side}")
-
-        my_side = pygame.Rect(my_real_pos, my_real_size)
-
-        return my_side
-
-    def deduce_dinamic_size(self, size):
-        if size:
-            self.size = size
-            self.image = image_tools.scale_image(self.image, size)
-            self.dinamic_size = False
-        else:
-            self.size = self.image.get_size()
-            self.dinamic_size = True
-
-    def set_dinamic_size(self, value):
-        self.dinamic_size = value
-
-    def set_image(self, image):
-        if self.dinamic_size:
-            self.image = image
-            self.size = image.get_size()
-        else:
-            self.image = oop.image_tools.scale_image(image, self.size)
-
-
-#°*°*°*°*°*°*°*°*°*°*°*°*°*°*°*#
-
-class SvgObject(Object):
-    def __init__(self, master_window, filename=default_image_fn,
-            pos=(0,0), depth_level=0, size=None, *args, **kwargs):
-
-        image = image_tools.load_svg(filename, size)
-        self.filename = filename
-
-        Object.__init__(self, master_window=master_window, pos=pos,
-            image=image, depth_level=depth_level, size=size, *args, **kwargs)
-
-    def set_size(self, new_size):
-        self.size = new_size
-        new_image = image_tools.load_svg(self.filename, new_size)
-        self.set_image(new_image)
-
-    def set_filename(self, new_fn):
-        self.filename = new_fn
-
-    def get_filename(self):
-        return self.filename
-
-#°*°*°*°*°*°*°*°*°*°*°*°*°*°*°*#
-
-class PercentedObject(Object):
-    def __init__(self, master_window, pos=(0,0), depth_level=0,
-            image=default_image, size=None):
-
-        BaseObject.__init__(
-            self, pos=pos, depth_level=depth_level, image=image, *args, **kwargs)
-
-        self.set_master_window(master_window)
-        if not size:
-            size = image.get_size()
-            self.set_real_size(size)
-        else:
-            self.set_size(size)
-
-#<><><><><><><><>#
-
-    def get_real_pos(self):
-        x_pos = self.master_window.perc_to_px(self.pos[x], "x")
-        y_pos = self.master_window.perc_to_px(self.pos[y], "y")
-        return x_pos, y_pos
-
-    def get_real_size(self):
-        real_size_x = self.master_window.perc_to_px(self.size[x], "x")
-        real_size_y = self.master_window.perc_to_px(self.size[y], "y")
-
-        return real_size_x, real_size_y
-
-    def get_size(self):
-        return self.size
-
-    def get_image(self):
-        real_size = self.get_real_size()
-        return image_tools.scale_image(self.image, real_size)
-
-#<><><><><><><><>#
-
-    def set_real_pos(self, new_pos):
-        x_pos = self.master_window.px_to_perc(new_pos[x], "x")
-        y_pos = self.master_window.px_to_perc(new_pos[y], "y")
-        self.set_pos((x_pos, y_pos))
-
-    def set_real_size(self, new_size):
-        size_x = self.master_window.px_to_perc(new_size[x], "x")
-        size_y = self.master_window.px_to_perc(new_size[y], "y")
-
-        self.set_size((size_x, size_y))
-
-    def set_size(self, new_size):
-        self.size = new_size
-
-class ShadowObject(Object):
-    """
-    Only for debugging
-    """
-    def __init__(self, *args, **kwargs):
-        Object.__init__(self, *args, **kwargs)
-        rect = self.get_rect()
-        self.image = pygame.Surface((rect.w,rect.h))
