@@ -99,7 +99,6 @@ class PygameScreenBackend:
 
     def update_events(self):
         new_events = pygame.event.get()
-        print(type(new_events))
         self.events = new_events
 
     def get_events(self, eventtype=None):
@@ -116,7 +115,9 @@ class PygameScreenBackend:
 
     is_focused = pygame.mouse.get_focused
 
-    set_cursor = pygame.mouse.set_cursor
+    set_cursor_visibility = pygame.mouse.set_visible
+
+    get_cursor_pos = pygame.mouse.get_pos
 
     set_title = pygame.display.set_caption
     

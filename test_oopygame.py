@@ -15,11 +15,17 @@
 
 # Copyright 2020-present Py-GNU-Unix <py.gnu.unix.moderator@gmail.com>
 
-from oopygame import window
-from oopygame import objects
+import oopygame
 
-win = window.Window((300,300))
-obj = objects.Object(win)
+class App(oopygame.Window):
+    def run(self):
+        snake = oopygame.Object(self)
+        snake.set_size((100,100))
 
-while True:
-    win.update()
+        while True:
+            self.screen.set_cursor_visibility(False)
+            snake.set_pos([ e - 50 for e in self.get_cursor_pos() ])
+            self.update()
+
+if __name__ == "__main__":
+    App((500, 400)).run()

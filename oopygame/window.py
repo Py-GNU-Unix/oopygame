@@ -27,14 +27,15 @@ default_icon = image_tools.load_image(default_icon_fn)
 
 class Window:
     def __init__(self, size, flags=0, title=None, bg_color=colors.white, 
-                icon=default_icon, screen=screen_backend.PygameScreenBackend):
+                icon=default_icon, screen=screen_backend.PygameScreenBackend,
+                open_point=None):
         
         self.screen = screen(size, flags)
         self.set_icon(icon)
         self.bg_color = bg_color
-
         self.objects = []
-        self.screen.open_window()       
+        self.screen.set_window_open_point(open_point)
+        self.screen.open_window()
 
         if not title:
             self.title = self.generate_default_title()
@@ -70,10 +71,30 @@ class Window:
                 self.screen.blit(object_image, object_position)
 
 #<><><><><><><>#
-    
+
+    def get_screen_size(self):
+        return self.screen.get_screen_size()
+
+    def detect_key(self, key):
+        return self.screen.detect_key(key)
+
+    def get_monitor_size(self):
+        return self.screen.get_monitor_size()
+
+    def is_focused(self):
+        return self.screen.is_focused()
+
+    def get_events(self, eventtype=None):
+        return self.screen.get_events(eventtype)
+
+    def get_cursor_pos(self):
+        return self.screen.get_cursor_pos()
+
+#<><><><><><><>#
+
     def set_title(self, new_title):
         self.screen.set_title(new_title)
-    
+
     @staticmethod
     def generate_default_title():
         import __main__
@@ -85,6 +106,9 @@ class Window:
 
     def set_bg_color(self, new_bg_color):
         self.bg_color = new_bg_color
+
+    def set_cursor_visibility(self, state):
+        self.screen.set_cursor_visibility()
 
 #<><><><><><><>#
 
