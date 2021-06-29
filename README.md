@@ -33,9 +33,9 @@ That's an Object-oriented API based on pygame. The goal of this library is help 
 
 - BSD (both wayland and xorg)
 
-- Windows (99%)
+- Windows
 
-- OS X (99%)
+- OS X
 
 ---
 
