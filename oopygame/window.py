@@ -15,6 +15,8 @@
 
 # Copyright 2020-present Py-GNU-Unix <py.gnu.unix.moderator@gmail.com>
 
+import operator
+
 from . import screen_backend
 from . import colors
 from . import exceptions
@@ -28,6 +30,11 @@ class Window:
                 icon=default_icon, screen=screen_backend.PygameScreenBackend):
         
         self.screen = screen(size, flags)
+        self.set_icon(icon)
+        self.bg_color = bg_color
+
+        self.objects = []
+        self.screen.open_window()       
 
         if not title:
             self.title = self.generate_default_title()
@@ -35,23 +42,17 @@ class Window:
             self.title = title
         self.set_title(self.title)
 
-        self.bg_color = bg_color
-
-        self.icon = icon
-        self.set_icon(icon)
-
-        self.objects = []
-        self.screen.open_window()
-
     def update(self):
         self.screen.close_if_need()
         self.screen.fill(self.bg_color)
+        self.blit_objects()
         self.screen.update()
 
-#+#+#+#+#+#+#+#+#+#+#+#+#+#+#+
+#<><><><><><><>#
 
     def add_object(self, *new_objects):
         self.objects = self.objects + list(new_objects)
+        self.objects.sort(key=operator.attrgetter('depth_level'))
 
     def remove_object(self, *objects_to_delete):
         try:
@@ -61,32 +62,31 @@ class Window:
             new_error = exceptions.MissingObjectException("Unable to remove object, not in list")
             raise new_error from previous_error
 
-    def get_objects_layers(self):
-        objects_layers = {}
-        for current_object in self.objects:
-            current_layer = objects_layers.get(current_object.depth, [])
-            objects_layers[current_object.depth] = current_layer.append(current_object)
-        object_layers = [objects_layers[key] for key in sorted(objects_layers.keys()) ]
-        return object_layers
-
     def blit_objects(self):
-        for layer in self.get_objects_layers():
-            for object_to_blit in layer:
-                if not object_to_blit.show:
-                    continue
-
+        for object_to_blit in self.objects:
+            if object_to_blit.show:
                 object_position = object_to_blit.get_real_pos()
                 object_image = object_to_blit.get_image()
                 self.screen.blit(object_image, object_position)
 
-#+#+#+#+#+#+#+#+#+#+#+#+#+#+#+
+#<><><><><><><>#
     
     def set_title(self, new_title):
         self.screen.set_title(new_title)
     
     @staticmethod
     def generate_default_title():
-        return __file__ + " - OOPygame"
+        import __main__
+        return __main__.__file__ + " - OOPygame"
 
     def set_icon(self, new_icon):
+        self.icon = new_icon
         self.screen.set_icon(new_icon)
+
+    def set_bg_color(self, new_bg_color):
+        self.bg_color = new_bg_color
+
+#<><><><><><><>#
+
+    def run(self):
+        raise NotImplementedError

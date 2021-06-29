@@ -24,35 +24,13 @@ default_image = image_tools.load_image(default_image_fn)
 X = 0
 Y = 1
 
-
-class Object:
-    def __init__(self, master_window, pos=(0,0), image=default_image, show=True, depth_level=0):
+class BaseObject:
+    def __init__(self, pos=(0,0), image=default_image, show=True, depth_level=0):
         self.show = show
         self.pos = pos
-        self.image = image
-        self.size = self.image.get_size()
+        self.size = None # The size will be setted from the image in the next line
+        self.set_image(image)
         self.depth_level = depth_level
-        self.master_window = None
-        self.set_master_window(master_window)
-
-#<><><><><><><><>#
-
-    def move_right(self, px):
-        current_pos = self.get_pos()
-        self.set_pos((current_pos[X] + px, current_pos[Y]))
-
-    def move_left(self, px):
-        current_pos = self.get_pos()
-        self.set_pos((current_pos[X] - px, current_pos[Y]))
-
-    def move_up(self, px):
-        current_pos = self.get_pos()
-
-        self.set_pos((current_pos[X], current_pos[Y] - px))
-
-    def move_down(self, px):
-        current_pos = self.get_pos()
-        self.set_pos((current_pos[X], current_pos[Y] + px))
 
 #<><><><><><><><>#
 
@@ -72,6 +50,7 @@ class Object:
 
     def set_image(self, new_image):
         self.image = new_image
+        self.size = self.image.get_size()
 
     def set_depth_level(self, new_level):
         self.depth_level = new_level
@@ -89,6 +68,32 @@ class Object:
 
     set_real_size = set_size
     get_real_size = get_size
+
+#%#%#%#%#%#%#%#%#%#%#%#%#%#
+
+class Object(BaseObject):
+    def __init__(self, master_window, pos=(0,0), image=default_image, show=True, depth_level=0):
+        BaseObject.__init__(self, pos, image, show, depth_level)
+        self.master_window = None
+        self.set_master_window(master_window)
+
+#<><><><><><><><>#
+
+    def move_right(self, px):
+        current_pos = self.get_pos()
+        self.set_pos((current_pos[X] + px, current_pos[Y]))
+
+    def move_left(self, px):
+        current_pos = self.get_pos()
+        self.set_pos((current_pos[X] - px, current_pos[Y]))
+
+    def move_up(self, px):
+        current_pos = self.get_pos()
+        self.set_pos((current_pos[X], current_pos[Y] - px))
+
+    def move_down(self, px):
+        current_pos = self.get_pos()
+        self.set_pos((current_pos[X], current_pos[Y] + px))
 
 #<><><><><><><><>#
 

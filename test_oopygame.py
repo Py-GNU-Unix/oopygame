@@ -15,4 +15,11 @@
 
 # Copyright 2020-present Py-GNU-Unix <py.gnu.unix.moderator@gmail.com>
 
-# NO TEST SCRIPT FOR THIS MINOR RELEASE
+from oopygame import window
+from oopygame import objects
+
+win = window.Window((300,300))
+obj = objects.Object(win)
+
+while True:
+    win.update()
