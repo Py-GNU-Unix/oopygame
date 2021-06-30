@@ -113,7 +113,7 @@ class Object(BaseObject):
     def is_out_of_window(self):
         pos = self.get_real_pos()
         obj_size = self.get_real_size()
-        window_size = self.master_window.get_window_size()
+        window_size = self.master_window.get_screen_size()
 
         for choor in X,Y:
             if pos[choor] < (0-obj_size[choor]):
@@ -126,7 +126,7 @@ class Object(BaseObject):
     def is_touching_borders(self):
         pos = self.get_pos()
         obj_size = self.get_real_size()
-        window_size = self.master_window.get_window_size()
+        window_size = self.master_window.get_screen_size()
 
         for choor in X,Y:
             if pos[choor] < 0 and pos[choor] > -obj_size[choor]:

@@ -49,6 +49,9 @@ class Window:
         self.blit_objects()
         self.screen.update()
 
+    def close_if_need(self):
+        self.screen.close_if_need()
+
 #<><><><><><><>#
 
     def add_object(self, *new_objects):
@@ -108,7 +111,7 @@ class Window:
         self.bg_color = new_bg_color
 
     def set_cursor_visibility(self, state):
-        self.screen.set_cursor_visibility()
+        self.screen.set_cursor_visibility(state)
 
 #<><><><><><><>#
 

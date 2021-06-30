@@ -15,24 +15,15 @@
 
 # Copyright 2020-present Py-GNU-Unix <py.gnu.unix.moderator@gmail.com>
 
-import oopygame
+import pygame
 
-class App(oopygame.Window):
-    def run(self):
-        snake = oopygame.Object(self, pos=(0,150))
-        snake.set_size((100,100))
-        clock = oopygame.time.Clock(60)
-        movement = 2
+class Clock:
+    def __init__(self, FPS):
+        self.FPS = FPS
+        self.clock = pygame.time.Clock()
+        
+    def set_fps(self, FPS):
+        self.FPS = FPS
 
-        while True:
-            if snake.is_out_of_window():
-                movement *= -1
-
-            snake.move_right(movement)
-
-            clock.tick()
-            self.update()
-
-if __name__ == "__main__":
-    A = App((500, 400))
-    A.run()
+    def tick(self):
+        self.clock.tick(self.FPS)

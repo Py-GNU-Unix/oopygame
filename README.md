@@ -1,8 +1,9 @@
 <p align="center">
-  <img title="oopygame" src="media/icon.svg" alt="icon.svg" width="125"/>
+  <img title="oopygame" src="media/icon.svg" alt="icon.svg" width="100"/>
   <h1 align="center">oopygame</h1>
   <h5 align="center">An object oriented api based on pygame 💣🖥️🚀</h5>
 </p>
+
 
 <p align="center">
   <img src="https://img.shields.io/github/languages/top/Py-GNU-Unix/oopygame?color=blueviolet&style=flat-square"/>
@@ -29,13 +30,15 @@ That's an Object-oriented API based on pygame. The goal of this library is help 
 
 ### Supported platforms:
 
-- GNU/Linux (both wayland and xorg)
+- GNU/Linux
 
-- BSD (both wayland and xorg)
-
-- Windows
+- BSD
 
 - OS X
+
+- Windows
+  
+  
 
 ---
 
