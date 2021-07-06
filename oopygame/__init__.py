@@ -32,3 +32,4 @@ from . import objects
 from . import screen_backend
 from . import window
 from . import time
+from . import text
